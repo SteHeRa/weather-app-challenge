@@ -1,0 +1,15 @@
+{
+  "name": "weather-app-challenge",
+  "version": "1.0.0",
+  "description": "You're asked to create a web application using React which allows its users to see the date, time, temperature and humidity for one or more city's of their choosing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  }
+}
