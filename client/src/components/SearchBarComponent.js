@@ -5,13 +5,16 @@ const SearchBar = ({ city, setCity, getCityWeather }) => {
     <div>
       <form onSubmit={(e) => getCityWeather(e)}>
         <label htmlFor="city">
-          Find City
-          <input
-            type="text"
-            name="city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          ></input>
+          <div className="input-field col s6">
+            <i className="material-icons prefix">search</i>
+            <input
+              type="text"
+              name="city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Search for city.."
+            ></input>
+          </div>
         </label>
       </form>
     </div>
