@@ -12,7 +12,7 @@ const Search = () => {
 
     setCity(e.target.city.value);
     const data = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=8ff99047cb9ea5a17b8fb164145df50c`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.OWM_API_KEY}`
     ).then((res) => res.json());
     console.log(data);
     setCityWeather(data);
