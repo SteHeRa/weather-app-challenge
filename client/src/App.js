@@ -11,7 +11,7 @@ const App = () => {
     <React.StrictMode>
       <div>
         <Search />
-        <WeatherList />
+        <WeatherList cityList={cityList} />
       </div>
     </React.StrictMode>
   );
