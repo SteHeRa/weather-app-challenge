@@ -3,7 +3,7 @@ import React from 'react';
 const SaveCityButton = ({ city, setCityList }) => {
   return (
     <button
-      className="waves-effect waves-light btn"
+      className="col s3 m4 offset-s4 offset-m4 waves-effect waves-light btn"
       onClick={() => {
         setCityList((old) => [...old, city]);
       }}

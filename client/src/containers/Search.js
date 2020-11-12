@@ -19,16 +19,21 @@ const Search = ({ setCityList }) => {
 
   return (
     <div className="row">
-      <div className="col m8">
-        <SearchBar
-          city={city}
-          setCity={setCity}
-          getCityWeather={getCityWeather}
-        />
-        <WeatherListItem weather={cityWeather} />
-        {cityWeather ? (
-          <SaveCityButton city={city} setCityList={setCityList} />
-        ) : null}
+      <div className="section">
+        <div className="col s12">
+          <SearchBar
+            city={city}
+            setCity={setCity}
+            getCityWeather={getCityWeather}
+          />
+          <div className="col s12">
+            <div className="col s4"></div>
+            <WeatherListItem weather={cityWeather} />
+          </div>
+          {cityWeather ? (
+            <SaveCityButton city={city} setCityList={setCityList} />
+          ) : null}
+        </div>
       </div>
     </div>
   );

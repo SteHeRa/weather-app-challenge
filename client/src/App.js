@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <React.StrictMode>
-      <div>
+      <div className="container">
         <Search setCityList={setCityList} />
         <WeatherList cityList={cityList} />
       </div>

@@ -23,18 +23,23 @@ const WeatherList = ({ cityList }) => {
   }, [cityList]);
 
   return (
-    <div>
-      <h2>Saved Cities</h2>
-      {cityWeathers.length
-        ? cityWeathers.map((cityWeather) => {
-            return (
-              <WeatherListItem
-                key={cityWeather.city.name}
-                weather={cityWeather}
-              />
-            );
-          })
-        : null}
+    <div className="row">
+      <h2>Your Saved Cities</h2>
+      <div className="divider"></div>
+      <div className="section">
+        <div className="col s12">
+          {cityWeathers.length
+            ? cityWeathers.map((cityWeather) => {
+                return (
+                  <WeatherListItem
+                    key={cityWeather.city.name}
+                    weather={cityWeather}
+                  />
+                );
+              })
+            : null}
+        </div>
+      </div>
     </div>
   );
 };

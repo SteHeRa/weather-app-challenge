@@ -2,10 +2,10 @@ import React from 'react';
 
 const SearchBar = ({ city, setCity, getCityWeather }) => {
   return (
-    <div>
+    <div className="col s12">
       <form onSubmit={(e) => getCityWeather(e)}>
         <label htmlFor="city">
-          <div className="input-field col s6">
+          <div className="input-field">
             <i className="material-icons prefix">search</i>
             <input
               type="text"
