@@ -8,9 +8,6 @@ const WeatherListItem = ({ weather }) => {
           <div className="card">
             <div className="card-title">
               <span>{weather.city.name}</span>
-              <button className="btn-floating waves-effect waves-light red">
-                <i className="material-icons">add</i>
-              </button>
             </div>
             <div className="card-content">
               <img

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 import SearchBar from '../components/SearchBarComponent';
 import WeatherListItem from '../components/WeatherListItem';
+import SaveCityButton from '../components/SaveCityButton';
+import ApiService from '../services/ApiService';
 
-const Search = () => {
+const Search = ({ setCityList }) => {
   const [city, setCity] = useState(''); //REVIEW: redundant? just use event in api call
   const [cityWeather, setCityWeather] = useState(undefined);
 
@@ -11,10 +13,7 @@ const Search = () => {
     e.preventDefault();
 
     setCity(e.target.city.value);
-    const data = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.OWM_API_KEY}`
-    ).then((res) => res.json());
-    console.log(data);
+    const data = await ApiService.fetchWeather(city);
     setCityWeather(data);
   };
 
@@ -27,6 +26,9 @@ const Search = () => {
           getCityWeather={getCityWeather}
         />
         <WeatherListItem weather={cityWeather} />
+        {cityWeather ? (
+          <SaveCityButton city={city} setCityList={setCityList} />
+        ) : null}
       </div>
     </div>
   );

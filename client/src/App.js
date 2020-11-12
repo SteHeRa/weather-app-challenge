@@ -10,7 +10,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <div>
-        <Search />
+        <Search setCityList={setCityList} />
         <WeatherList cityList={cityList} />
       </div>
     </React.StrictMode>
