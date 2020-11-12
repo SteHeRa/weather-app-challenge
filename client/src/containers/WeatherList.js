@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import WeatherListItem from '../components/WeatherListItem';
+import ApiService from '../services/ApiService';
 
 const WeatherList = ({ cityList }) => {
   const [cityWeathers, setCityWeathers] = useState([]);
 
   const getCityWeathers = async (cityList) => {
-    const data = cityList.map((city) => {
-      return fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.OWM_API_KEY}`
-      ).then((res) => res.json());
-    });
-    setCityWeathers(data);
+    if (cityList.length > 0) {
+      const data = await Promise.all(
+        await cityList.map(async (city) => {
+          const res = await ApiService.fetchWeather(city);
+          return res;
+        })
+      );
+      setCityWeathers(data);
+    } else return [];
   };
 
   useEffect(() => {
@@ -21,9 +25,16 @@ const WeatherList = ({ cityList }) => {
   return (
     <div>
       <h2>Saved Cities</h2>
-      {cityWeathers.map((weather) => (
-        <WeatherListItem key={weather.city.name} weather={weather} />
-      ))}
+      {cityWeathers.length
+        ? cityWeathers.map((cityWeather) => {
+            return (
+              <WeatherListItem
+                key={cityWeather.city.name}
+                weather={cityWeather}
+              />
+            );
+          })
+        : null}
     </div>
   );
 };
