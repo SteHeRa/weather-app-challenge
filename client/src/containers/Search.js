@@ -17,6 +17,13 @@ const Search = ({ setCityList }) => {
     setCityWeather(data);
   };
 
+  const saveCity = async () => {
+    const res = await ApiService.postCity(process.env.TEST_USER_ID, city);
+    if (res) {
+      setCityList((old) => [...old, city]);
+    }
+  };
+
   return (
     <div className="row">
       <div className="section">
@@ -30,9 +37,7 @@ const Search = ({ setCityList }) => {
             <div className="col s4"></div>
             <WeatherListItem weather={cityWeather} />
           </div>
-          {cityWeather ? (
-            <SaveCityButton city={city} setCityList={setCityList} />
-          ) : null}
+          {cityWeather ? <SaveCityButton saveCity={saveCity} /> : null}
         </div>
       </div>
     </div>
