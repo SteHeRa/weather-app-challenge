@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "seed": "node seeders/testuser.js",
     "dev": "nodemon index.js",
     "format": "prettier --write \"**/*.js\"",
     "lint": "eslint \"**/*.{js}\"",
