@@ -5,22 +5,34 @@ import WeatherListItem from '../components/WeatherListItem';
 import SaveCityButton from '../components/SaveCityButton';
 import ApiService from '../services/ApiService';
 
-const Search = ({ setCityList }) => {
-  const [city, setCity] = useState(''); //REVIEW: redundant? just use event in api call
+import sortWeatherByDay from '../helpers/sortWeatherByDay';
+
+const Search = ({ testUserId, cityList, setCityList }) => {
+  const [city, setCity] = useState('');
   const [cityWeather, setCityWeather] = useState(undefined);
+  const [error, setError] = useState('');
 
   const getCityWeather = async (e) => {
     e.preventDefault();
 
     setCity(e.target.city.value);
     const data = await ApiService.fetchWeather(city);
-    setCityWeather(data);
+    const sortedData = {
+      name: data.city.name,
+      weather: sortWeatherByDay(data),
+    };
+    setCityWeather(sortedData);
   };
 
   const saveCity = async () => {
-    const res = await ApiService.postCity(process.env.TEST_USER_ID, city);
-    if (res) {
-      setCityList((old) => [...old, city]);
+    if (cityList.includes(city)) {
+      setError('This city is already in your saved cities.');
+    } else {
+      setError('');
+      const res = await ApiService.postCity(testUserId, city);
+      if (res) {
+        setCityList((old) => [...old, city]);
+      }
     }
   };
 
@@ -38,6 +50,7 @@ const Search = ({ setCityList }) => {
             <WeatherListItem weather={cityWeather} />
           </div>
           {cityWeather ? <SaveCityButton saveCity={saveCity} /> : null}
+          <p className="col s4 offset-s4 red-text text-darken-2">{error}</p>
         </div>
       </div>
     </div>
