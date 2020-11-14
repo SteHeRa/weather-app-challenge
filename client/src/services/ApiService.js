@@ -6,6 +6,11 @@ const fetchWeather = async (city) => {
   ).then((res) => res.json());
 };
 
+const getUserId = async () => {
+  const testUserId = await fetch(`${BASE_URL}/user`).then((res) => res.json());
+  return testUserId;
+};
+
 const getCities = async (userId) => {
   const cities = await fetch(
     `${BASE_URL}/cities?userId=${userId}`
@@ -25,6 +30,7 @@ const postCity = async (userId, city) => {
 
 module.exports = {
   fetchWeather,
+  getUserId,
   getCities,
   postCity,
 };

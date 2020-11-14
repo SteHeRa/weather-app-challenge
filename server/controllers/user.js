@@ -1,5 +1,18 @@
 const User = require('../models/userSchema');
 
+const getUserId = async (req, res) => {
+  try {
+    const testUser = await User.findOne({ email: 'test' });
+    res.status(200);
+    res.send(JSON.stringify(testUser.id));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('---> error getting user Id', err);
+    res.status(500);
+    res.send({ err, message: 'Could not user Id' });
+  }
+};
+
 const getCities = async (req, res) => {
   const { userId } = req.query;
   try {
@@ -14,7 +27,7 @@ const getCities = async (req, res) => {
     res.send(user.savedCities);
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log('---> error posting new city', err);
+    console.log('---> error getting cities', err);
     res.status(500);
     res.send({ err, message: 'Could not get cities' });
   }
@@ -41,6 +54,7 @@ const postCity = async (req, res) => {
 };
 
 module.exports = {
+  getUserId,
   getCities,
   postCity,
 };
