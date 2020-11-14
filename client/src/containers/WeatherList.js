@@ -14,8 +14,39 @@ const WeatherList = ({ cityList }) => {
           return res;
         })
       );
-      setCityWeathers(data);
-    } else return [];
+      const sortedData = data.map((city) => {
+        return {
+          name: city.city.name,
+          weather: sortWeatherByDay(city),
+        };
+      });
+      setCityWeathers(sortedData);
+    } else setCityWeathers([]);
+  };
+
+  const sortWeatherByDay = (weather) => {
+    const weatherSortedByDay = [[], [], [], [], [], []];
+    if (weather) {
+      let currentDay;
+      let split = 0;
+      for (let i = 0; i < 6; i++) {
+        let day = [];
+        for (let j = split; j < weather.list.length; j++) {
+          if (currentDay === new Date(weather.list[j].dt * 1000).getDay()) {
+            day.push(weather.list[j]);
+          } else if (currentDay === undefined) {
+            currentDay = new Date(weather.list[j].dt * 1000).getDay();
+            day.push(weather.list[j]);
+          } else {
+            currentDay = new Date(weather.list[j].dt * 1000).getDay();
+            split = j;
+            break;
+          }
+        }
+        weatherSortedByDay[i] = day;
+      }
+    }
+    return weatherSortedByDay;
   };
 
   useEffect(() => {
@@ -32,7 +63,7 @@ const WeatherList = ({ cityList }) => {
             ? cityWeathers.map((cityWeather) => {
                 return (
                   <WeatherListItem
-                    key={cityWeather.city.name}
+                    key={cityWeather.name}
                     weather={cityWeather}
                   />
                 );
