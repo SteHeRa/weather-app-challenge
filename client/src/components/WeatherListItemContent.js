@@ -1,7 +1,6 @@
 import React from 'react';
 
 const WeatherListItemContent = ({ weather }) => {
-  console.log(weather);
   return (
     <div className="card-content">
       <div className="col s12">
@@ -13,7 +12,6 @@ const WeatherListItemContent = ({ weather }) => {
         </div>
       </div>
       <ul>
-        <li>{new Date(weather.dt * 1000).toUTCString()}</li>
         <li>
           {weather.weather[0].main}: {weather.weather[0].description}
         </li>
