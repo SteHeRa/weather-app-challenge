@@ -20,6 +20,8 @@ const sortWeatherByDay = (weather) => {
       weatherSortedByDay[i] = day;
     }
   }
+  /*if user checks weather between 21:00 and 00:00 the function
+  will return an array with the last two elements identical*/
   if (weatherSortedByDay[0].length === 8) {
     weatherSortedByDay.pop();
   }
